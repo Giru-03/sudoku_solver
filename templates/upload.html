@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
 <head>
     <title>Sudoku Solver</title>
@@ -79,4 +79,71 @@
         </form>
     </div>
 </body>
+</html> -->
+
+{% load range_filter %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sudoku Solver</title>
+    <style>
+        table {
+            margin: 20px auto;
+        }
+        td {
+            border: 1px solid black;
+            width: 40px;
+            height: 40px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        input {
+            width: 100%;
+            height: 100%;
+            font-size: 18px;
+            text-align: center;
+            border: 1px solid #000;
+        }
+        input:focus {
+            outline: none;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center;">Enter Sudoku</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <table>
+            {% for i in 9|range_filter %}
+            <tr>
+                {% for j in 9|range_filter %}
+                <td>
+                    <input type="text" name="cell-{{ i }}-{{ j }}" maxlength="1" pattern="[0-9]*">
+                </td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </table>
+        <div style="text-align: center;">
+            <button type="submit">Solve Sudoku</button>
+        </div>
+    </form>
+</body>
 </html>
+
